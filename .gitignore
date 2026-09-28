@@ -17,12 +17,22 @@
 /.next/
 /out/
 
-# production
+# production/runtime data
 /build
+/data/*
+!/data/.gitkeep
+
+# local generated artifacts
+/output/
+/tmp/
+/exports/
 
 # misc
 .DS_Store
 *.pem
+*.key
+*.p12
+*.pfx
 
 # debug
 npm-debug.log*
@@ -32,6 +42,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel

@@ -1,0 +1,22 @@
+[project]
+name = "creality-print-mcp"
+version = "0.1.0"
+description = "Local MCP bridge from Autodesk Fusion to Creality Print"
+requires-python = ">=3.10"
+dependencies = [
+  "mcp>=1.26,<2",
+]
+
+[project.scripts]
+creality-print-mcp = "creality_print_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

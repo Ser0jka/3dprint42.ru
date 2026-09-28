@@ -1,0 +1,7 @@
+# Large 3D assets must be stored through Git LFS on the shared remote.
+*.stl filter=lfs diff=lfs merge=lfs -text
+*.STL filter=lfs diff=lfs merge=lfs -text
+*.step filter=lfs diff=lfs merge=lfs -text
+*.STEP filter=lfs diff=lfs merge=lfs -text
+*.stp filter=lfs diff=lfs merge=lfs -text
+*.STP filter=lfs diff=lfs merge=lfs -text

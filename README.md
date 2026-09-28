@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Центр 3D-печати — 3dprint42.ru
 
-## Getting Started
+Сайт, каталог 3D-моделей, админка заявок и производственная CRM Центра 3D-печати в Кемерово.
 
-First, run the development server:
+## Быстрый старт
+
+Требования: Node.js 20+, npm и Git. Для больших 3D-файлов нужен Git LFS.
 
 ```bash
+cp .env.example .env.local
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Сайт откроется на `http://localhost:3000`. Админка — `/admin`, рабочий кабинет — `/dashboard`.
+В режиме разработки админка допускает локальные значения `admin/admin`, если переменные администратора не заданы. В production обязательны собственные длинные секреты.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Проверка
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+## Постоянный контекст проекта
 
-To learn more about Next.js, take a look at the following resources:
+Новый чат Codex автоматически получает правила из `AGENTS.md`. Подробная память проекта находится в `docs/`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Контекст проекта](docs/PROJECT_CONTEXT.md)
+- [Архитектура](docs/ARCHITECTURE.md)
+- [Бизнес-правила](docs/BUSINESS_RULES.md)
+- [CRM](docs/CRM.md)
+- [Оценка моделирования](docs/AI_ESTIMATOR.md)
+- [Развёртывание](docs/DEPLOYMENT.md)
+- [Подключение второго ПК](docs/SECOND_PC_SETUP.md)
+- [Журнал решений](docs/DECISIONS.md)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Безопасность данных
 
-## Deploy on Vercel
+Не добавляйте в Git `.env.local`, production-конфигурацию, заявки, файлы клиентов и содержимое `data/`. В репозитории хранится только `.env.example` без реальных значений.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Работа на двух компьютерах
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Перед работой: `git pull --rebase`.
+2. После проверенного изменения: `git add`, `git commit`, `git push`.
+3. На втором ПК: `git clone` один раз, затем `git pull --rebase`.
+4. `.env.local` создаётся отдельно на каждом ПК и через Git не передаётся.
+5. Production-данные CRM находятся на сервере и не копируются между компьютерами через Git.

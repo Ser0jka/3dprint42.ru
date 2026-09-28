@@ -1,0 +1,783 @@
+.workspace {
+  --crm-border: color-mix(in srgb, var(--ink) 24%, transparent);
+  --crm-muted: color-mix(in srgb, var(--ink) 62%, transparent);
+  --crm-danger: #8e2f25;
+  padding: clamp(20px, 2.5vw, 36px) clamp(14px, 2.5vw, 36px) 64px;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.workspace :is(button, input, select, textarea) {
+  font: inherit;
+}
+
+.workspace :is(button, summary, select) {
+  touch-action: manipulation;
+}
+
+.workspace :is(button, input, select, textarea):focus-visible,
+.createPanel summary:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 2px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  gap: 20px;
+  align-items: end;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--crm-border);
+}
+
+.hero > div:first-child {
+  max-width: 900px;
+}
+
+.hero span,
+.identity label,
+.stats span,
+.toolbar,
+.createPanel summary,
+.createPanel label > span,
+.column header span,
+.orderCard > span,
+.orderTitle span,
+.orderTitle label > span,
+.orderForm label > span,
+.workHeader span,
+.addStep label > span,
+.stepCard header,
+.bidForm label > span,
+.adjustments > div:first-child > span,
+.payouts > div:first-child > span,
+.adjustments label > span,
+.settingsBlock header > span,
+.settingsBlock label > span {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.11em;
+}
+
+.hero > div > span,
+.workHeader span,
+.adjustments > div:first-child > span,
+.payouts > div:first-child > span,
+.settingsBlock header > span {
+  color: var(--ember);
+}
+
+.hero h1 {
+  max-width: 16ch;
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+}
+
+.hero p {
+  display: none;
+  max-width: 66ch;
+  margin-top: 12px;
+  color: var(--crm-muted);
+  font-size: clamp(14px, 1vw, 17px);
+  line-height: 1.4;
+}
+
+.identity {
+  display: grid;
+  gap: 10px;
+}
+
+.identity select,
+.orderTitle select,
+.workspace input,
+.workspace select,
+.workspace textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 11px;
+  color: var(--ink);
+  background: var(--vapor);
+  border: 1px solid var(--crm-border);
+  border-radius: 12px;
+  outline: 0;
+}
+
+.workspace textarea {
+  min-height: 64px;
+  resize: vertical;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 14px;
+  border: 1px solid var(--crm-border);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.stats > div {
+  display: grid;
+  gap: 5px;
+  min-height: 50px;
+  padding: 8px 14px;
+  align-content: center;
+}
+
+.stats > div + div {
+  border-left: 1px solid var(--crm-border);
+}
+
+.stats strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats span {
+  color: var(--crm-muted);
+}
+
+.toolbar {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.toolbar > div {
+  display: flex;
+  border: 1px solid var(--crm-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.toolbar button,
+.workspace form > button,
+.claimButton,
+.stepActions button,
+.bidList button {
+  min-height: 44px;
+  padding: 0 15px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--crm-border);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  transition: color 180ms var(--ease-out), background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), opacity 180ms var(--ease-out);
+}
+
+.toolbar > div button {
+  min-height: 44px;
+  padding: 0 16px;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.toolbar > div button + button {
+  border-left: 1px solid var(--crm-border);
+}
+
+.toolbar button[data-active="true"],
+.workspace form > button:hover,
+.claimButton:hover,
+.stepActions button:hover,
+.bidList button:hover {
+  color: var(--vapor);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.workspace button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.feedback {
+  min-height: 18px;
+  margin-top: 6px;
+  color: var(--crm-muted);
+  font-size: 14px;
+}
+
+.feedback[data-kind="success"] { color: #21683c; }
+.feedback[data-kind="error"] { color: #a42b22; }
+
+.createPanel {
+  margin-top: 8px;
+  border: 1px solid var(--crm-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.createPanel summary {
+  display: flex;
+  min-height: 46px;
+  padding: 0 16px;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+
+.createPanel summary::-webkit-details-marker { display: none; }
+
+.createPanel[open] summary {
+  color: var(--vapor);
+  background: var(--ink);
+}
+
+.createPanel form {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding: 16px;
+  background: var(--vapor);
+}
+
+.createPanel label,
+.orderForm label,
+.addStep label,
+.bidForm label,
+.adjustments label,
+.settingsBlock label {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.wide { grid-column: 1 / -1; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.column {
+  min-width: 0;
+  border: 1px solid var(--crm-border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.column > header {
+  display: flex;
+  min-height: 64px;
+  padding: 12px;
+  gap: 12px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--crm-border);
+}
+
+.column > header > div {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+
+.column > header small {
+  display: none;
+}
+
+.column > header strong {
+  min-width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--crm-border);
+  border-radius: 50%;
+  font-variant-numeric: tabular-nums;
+}
+
+.cards {
+  display: grid;
+  gap: 6px;
+  max-height: 280px;
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.orderCard {
+  display: grid;
+  gap: 7px;
+  width: 100%;
+  min-height: 126px;
+  padding: 12px;
+  color: inherit;
+  text-align: left;
+  background: var(--vapor);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+
+.orderCard:hover,
+.orderCard[data-selected="true"] {
+  border-color: var(--ink);
+}
+
+.orderCard:active { transform: scale(0.99); }
+
+.orderCard > span { color: var(--crm-muted); }
+
+.orderCard > strong {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.orderCard > p {
+  color: var(--crm-muted);
+  font-size: 13px;
+}
+
+.orderCard > div {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: auto;
+}
+
+.orderCard > div b { font-variant-numeric: tabular-nums; }
+.orderCard > div small { color: var(--crm-muted); }
+
+.emptyColumn {
+  padding: 24px 12px;
+  color: var(--crm-muted);
+  text-align: center;
+}
+
+.emptySelection {
+  margin-top: 16px;
+  padding: 48px 24px;
+  text-align: center;
+  border: 1px dashed var(--crm-border);
+  border-radius: 24px;
+}
+
+.emptySelection h2 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.emptySelection p { margin-top: 8px; color: var(--crm-muted); }
+
+.orderDetails {
+  margin-top: 32px;
+  padding: clamp(16px, 2vw, 26px);
+  background: var(--vapor);
+  border: 1px solid var(--crm-border);
+  border-radius: 20px;
+}
+
+.orderTitle {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.orderTitle h2,
+.workHeader h3,
+.adjustments h3,
+.payouts h3,
+.settingsBlock h2 {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.orderTitle label {
+  display: grid;
+  gap: 7px;
+  min-width: 220px;
+}
+
+.orderTitleActions {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+}
+
+.orderTitleActions label {
+  display: grid;
+  gap: 7px;
+  min-width: 190px;
+}
+
+.dangerButton {
+  min-height: 44px;
+  padding: 0 15px;
+  color: var(--crm-danger);
+  background: transparent;
+  border: 1px solid var(--crm-danger);
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.09em;
+}
+
+.dangerButton:hover {
+  color: var(--vapor);
+  background: var(--crm-danger);
+}
+
+.orderForm {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--crm-border);
+}
+
+.orderForm > button { justify-self: start; }
+
+.workHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 500px);
+  gap: 16px;
+  align-items: end;
+  margin-top: 32px;
+}
+
+.workHeader p {
+  color: var(--crm-muted);
+  line-height: 1.5;
+}
+
+.addStep {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(240px, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px solid var(--crm-border);
+  border-radius: 14px;
+}
+
+.stepList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stepCard {
+  padding: 14px;
+  background: var(--paper);
+  border: 1px solid var(--crm-border);
+  border-radius: 14px;
+}
+
+.stepCard[data-done="true"] { opacity: 0.66; }
+
+.stepCard > header {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  color: var(--crm-muted);
+}
+
+.stepCard > header b { color: var(--ink); font-weight: 500; }
+
+.stepState {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.stepState button {
+  min-height: 44px;
+  padding: 0 9px;
+  color: var(--crm-danger);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.stepState button:hover {
+  border-color: var(--crm-danger);
+}
+
+.stepMain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: start;
+  margin-top: 14px;
+}
+
+.stepMain h4 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.stepMain p {
+  margin-top: 7px;
+  color: var(--crm-muted);
+}
+
+.stepMain > strong {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.claimButton { margin-top: 14px; }
+
+.bidForm {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.7fr) minmax(150px, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--crm-border);
+}
+
+.bidList {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.bidList > div,
+.adjustmentRow,
+.payoutRow,
+.reserve {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--crm-border);
+}
+
+.bidList span,
+.adjustmentRow span,
+.payoutRow span,
+.reserve span {
+  display: grid;
+  gap: 3px;
+}
+
+.bidList small,
+.adjustmentRow small,
+.payoutRow small,
+.reserve small {
+  color: var(--crm-muted);
+}
+
+.stepActions {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--crm-border);
+}
+
+.financeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.adjustments,
+.payouts {
+  padding: 18px;
+  border: 1px solid var(--crm-border);
+  border-radius: 16px;
+}
+
+.adjustments form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.adjustments form > button { justify-self: start; }
+
+.adjustmentRow button {
+  width: 44px;
+  height: 44px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--crm-border);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.payouts > p {
+  margin-top: 24px;
+  color: var(--crm-muted);
+}
+
+.payoutRow { grid-template-columns: minmax(0, 1fr) auto; }
+.payoutRow > strong,
+.reserve > strong { font-size: 20px; font-variant-numeric: tabular-nums; }
+
+.reserve {
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-top: 20px;
+  padding: 18px;
+  color: var(--vapor);
+  background: var(--ink);
+  border: 0;
+  border-radius: 14px;
+}
+
+.reserve[data-negative="true"] { background: var(--crm-danger); }
+
+.settingsGrid {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.settingsBlock {
+  padding: clamp(16px, 2vw, 24px);
+  border: 1px solid var(--crm-border);
+  border-radius: 18px;
+}
+
+.settingsBlock header p {
+  max-width: 64ch;
+  margin-top: 12px;
+  color: var(--crm-muted);
+  line-height: 1.5;
+}
+
+.quickAdd,
+.typeAdd {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--vapor);
+  border-radius: 14px;
+}
+
+.typeAdd { grid-template-columns: 1.4fr 0.8fr 0.6fr auto auto auto; }
+
+.check {
+  display: flex !important;
+  min-height: 46px;
+  gap: 9px !important;
+  align-items: center;
+}
+
+.check input {
+  width: 20px;
+  min-height: 20px;
+  accent-color: var(--ink);
+}
+
+.ruleList {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ruleList > form {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 0.7fr auto auto auto auto;
+  gap: 8px;
+  align-items: end;
+  padding: 12px;
+  border: 1px solid var(--crm-border);
+  border-radius: 12px;
+}
+
+.ruleList > form:has(label:nth-child(2):last-of-type) {
+  grid-template-columns: 1fr 1fr auto auto;
+}
+
+@media (max-width: 1500px) {
+  .typeAdd { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ruleList > form { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1180px) {
+  .board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1050px) {
+  .hero { grid-template-columns: 1fr; }
+  .identity { max-width: 420px; }
+  .board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .createPanel form,
+  .orderForm { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stepList,
+  .financeGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .workspace { padding-inline: 12px; }
+  .hero h1 { font-size: clamp(2.5rem, 14vw, 4rem); }
+  .stats { grid-template-columns: 1fr; }
+  .stats > div { min-height: 92px; }
+  .stats > div + div { border-left: 0; border-top: 1px solid var(--crm-border); }
+  .toolbar { align-items: stretch; flex-direction: column; }
+  .toolbar > div { width: 100%; }
+  .toolbar > div button { flex: 1; }
+  .toolbar > button { align-self: flex-start; }
+  .board,
+  .createPanel form,
+  .orderForm,
+  .workHeader,
+  .addStep,
+  .quickAdd,
+  .typeAdd,
+  .ruleList > form,
+  .ruleList > form:has(label:nth-child(2):last-of-type),
+  .adjustments form { grid-template-columns: 1fr; }
+  .orderTitle,
+  .orderTitleActions { align-items: stretch; flex-direction: column; }
+  .orderTitle label { min-width: 0; }
+  .bidForm { grid-template-columns: 1fr; }
+  .stepMain { grid-template-columns: 1fr; }
+  .stepMain > strong { white-space: normal; }
+  .orderDetails { border-radius: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workspace *,
+  .workspace *::before,
+  .workspace *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
